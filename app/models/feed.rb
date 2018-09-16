@@ -1,5 +1,5 @@
 class Feed < ApplicationRecord
-  has_many :items
+  has_many :items, dependent: :destroy
 
   def fetch_and_update
     feed = Feedjira::Feed.fetch_and_parse(self.url)
