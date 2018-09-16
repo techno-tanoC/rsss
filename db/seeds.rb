@@ -1,7 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Rake::Task['db:migrate:reset'].invoke
+
+url = 'https://gigazine.net/news/rss_2.0/'
+rss = Feedjira::Feed.fetch_and_parse(url)
+
+feed = Feed.create!(title: rss.title, url: rss.feed_url)
+
+rss.entries.each do |entry|
+  feed.items.create!(title: entry.title, url: entry.url, published_at: entry.published)
+end
