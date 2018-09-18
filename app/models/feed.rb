@@ -1,6 +1,9 @@
 class Feed < ApplicationRecord
   has_many :items, dependent: :destroy
 
+  validates :title, presence: true
+  validates :url, presence: true
+
   def fetch_and_update
     feed = Feedjira::Feed.fetch_and_parse(self.url)
     feed.entries.reverse_each do |entry|
