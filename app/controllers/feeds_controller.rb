@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :edit, :update, :destroy, :fetch]
+  before_action :set_feed, only: %i(show edit update destroy fetch)
 
   # GET /feeds
   # GET /feeds.json
