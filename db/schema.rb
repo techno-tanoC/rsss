@@ -13,17 +13,18 @@
 ActiveRecord::Schema.define(version: 2018_09_16_122146) do
 
   create_table "feeds", force: :cascade do |t|
-    t.text "title"
-    t.text "url"
+    t.text "title", null: false
+    t.text "url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
-    t.text "title"
-    t.text "url"
-    t.datetime "published_at"
+    t.text "title", null: false
+    t.text "url", null: false
+    t.boolean "checked", default: false, null: false
     t.integer "feed_id"
+    t.datetime "published_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_items_on_feed_id"
