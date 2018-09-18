@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  before_action :set_feed, only: [:show, :edit, :update, :destroy, :fetch]
 
   # GET /feeds
   # GET /feeds.json
@@ -57,6 +57,14 @@ class FeedsController < ApplicationController
     @feed.destroy
     respond_to do |format|
       format.html { redirect_to feeds_url, notice: 'Feed was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def fetch
+    @feed.fetch_and_update
+    respond_to do |format|
+      format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
       format.json { head :no_content }
     end
   end
