@@ -6,10 +6,8 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Url</th>
       <th>Checked</th>
       <th>Published at</th>
-      <th>Feed</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,11 +15,11 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.title %></td>
-        <td><%= item.url %></td>
+        <td>
+          <%= link_to item.title, item.url, target: :new %>
+        </td>
         <td><%= item.checked %></td>
         <td><%= item.published_at %></td>
-        <td><%= item.feed %></td>
         <td><%= link_to 'Show', item %></td>
       </tr>
     <% end %>
